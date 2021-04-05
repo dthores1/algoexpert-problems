@@ -17,14 +17,12 @@ Example:
 
 # This uses O(n) time, traversing the array once
 def twoNumberSum(array, targetSum):
-
 	numbers_tried = set()
 	result = []
 	
-	for i in array:
-		
+	for i in array:	
 		needed_number = targetSum - i
-		
+        
 		if needed_number in numbers_tried:
 			result = [needed_number, i]
 			return result
