@@ -18,15 +18,15 @@ class MinMaxStack:
         return None
 
     def pop(self):
-        if len(self.stack) > 0:
+        if len(self.stack):
             del self.min_max_stack[-1]
             return self.stack.pop()
         return None
 
     def push(self, number):
-        if len(self.stack) > 0:
-            min_num = number if number < self.getMin() else self.getMin()
-            max_num = number if number > self.getMax() else self.getMax()
+        if len(self.stack):
+            min_num = min(number, self.getMin())
+            max_num = max(number, self.getMax())
         else:
             min_num = number
             max_num = number
@@ -36,11 +36,11 @@ class MinMaxStack:
         self.stack.append(number)
 
     def getMin(self):
-        if len(self.stack) > 0:
+        if len(self.stack):
             return self.min_max_stack[-1]["min"]
         return None
 
     def getMax(self):
-        if len(self.stack) > 0:
+        if len(self.stack):
             return self.min_max_stack[-1]["max"]
         return None
