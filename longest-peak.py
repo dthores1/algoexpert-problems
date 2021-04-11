@@ -10,7 +10,7 @@
         array = [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
 
         Output:
-            6 # 0, 10, 6, 5, -1, -3
+            6       # 0, 10, 6, 5, -1, -3
 """
 def longestPeak(array):
     if len(array) <= 2:
