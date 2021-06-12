@@ -44,10 +44,10 @@
         // 3) 1 -> 2 -> 0 -> 1
         // These are just 3 examples; there are more.
 """
-# For visit_info, 0 means not visited, 1 means visiting, 2 means visited
-# Can also accomplish this with constant string 
+from enum import Enum, auto
+
 def cycleInGraph(edges):
-	visit_info = [0]*len(edges)
+	visit_info = [Status.NOT_STARTED] * len(edges)
 
 	for i in range(len(edges)):
 		cycles = dfs_traverse(i, edges, visit_info)
@@ -58,10 +58,10 @@ def cycleInGraph(edges):
 	return False
 		
 def dfs_traverse(node, edges, visit_info):
-	if visit_info[node] == 1:
+	if visit_info[node] == Status.IN_PROGRESS:
 		return True
 	
-	visit_info[node] = 1
+	visit_info[node] = Status.IN_PROGRESS
 	
 	for kid in edges[node]:
 		cycles = dfs_traverse(kid, edges, visit_info)
@@ -69,4 +69,51 @@ def dfs_traverse(node, edges, visit_info):
 		if cycles:
 			return True
 	
-	visit_info[node] = 2
+	visit_info[node] = Status.VISITED
+
+class Status(Enum):
+    NOT_STARTED = auto()
+    IN_PROGRESS = auto()
+    VISITED = auto()
+
+edges1 = [
+    [1, 3],
+    [2, 3, 4],
+    [0],
+    [],
+    [2, 5],
+    []
+]
+assert cycleInGraph(edges1)
+
+edges2 = [
+    [1, 2],
+    [2],
+    []
+]
+assert not cycleInGraph(edges2)
+
+edges3 = [
+    [1, 2],
+    [2],
+    [1]
+]
+assert cycleInGraph(edges3)
+
+edges4 = [
+    [1, 2],
+    [2],
+    [1, 3],
+    [3]
+]
+assert cycleInGraph(edges4)
+
+edges5 = [
+    [],
+    [0, 2],
+    [0, 3],
+    [0, 4],
+    [0, 5],
+    [0]
+]
+assert(edges5)
